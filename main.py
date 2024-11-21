@@ -59,6 +59,9 @@ with tab2:
     fig2 = top_names_plot(data, year=year_input, n=n_names)
     st.plotly_chart(fig2)
 
+    fig3 = one_hit_wonders(ohw_data, year_input)
+    st.plotly_chart(fig3)
+
     st.write('Unique Names Table')
     output_table = unique_names_summary(data, year_input)
     st.dataframe(output_table)
