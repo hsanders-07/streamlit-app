@@ -43,34 +43,37 @@ with st.sidebar:
     input_name = st.text_input('Enter a name: ')
     year_input = st.slider("Year", min_value= 1880, max_value= 2023, value= 2000)
     n_names = st.radio('Number of names per sex', [3, 5, 10])
+    on = st.toggle("Activate feature")
+
+
 
 tab1, tab2 = st.tabs(['Names', 'Year'])
+if on:
+    with tab1:
+        name_data = data[data['name'] == input_name].copy()
+        fig = px.line(name_data, x='year', y='count', color='sex')
+        st.plotly_chart(fig)
 
-with tab1:
-    name_data = data[data['name'] == input_name].copy()
-    fig = px.line(name_data, x='year', y='count', color='sex')
-    st.plotly_chart(fig)
+        next_fig = name_sex_balance_plot(data, name=input_name)
+        if next_fig:  # Check if a figure was returned
+            st.pyplot(next_fig)
 
-    next_fig = name_sex_balance_plot(data, name=input_name)
-    if next_fig:  # Check if a figure was returned
-        st.pyplot(next_fig)
+    with tab2:
+        fig2 = top_names_plot(data, year=year_input, n=n_names)
+        st.plotly_chart(fig2)
 
-with tab2:
-    fig2 = top_names_plot(data, year=year_input, n=n_names)
-    st.plotly_chart(fig2)
+        st.write('Unique Names Table')
+        output_table = unique_names_summary(data, year_input)
+        st.dataframe(output_table)
 
-    st.write('Unique Names Table')
-    output_table = unique_names_summary(data, year_input)
-    st.dataframe(output_table)
-
-    with st.expander("See explanation"):
-        st.write('''
-        The table above gives some statistics based on the year you selected and the female/male names of that year. The Total Names
-                 section gives you what you probably can infer, the number of names/number of babies born of that gender. The Unique
-                 Names section tells you how many different names there are within both genders. Finally, Percent Unique is a division
-                 problem that takes Unique Names and divides it by Total Names for each gender and multiplies it by 100 to give you the 
-                 percentage of unique names there are for each gender.
-        ''')
+        with st.expander("See explanation"):
+            st.write('''
+            The table above gives some statistics based on the year you selected and the female/male names of that year. The Total Names
+                    section gives you what you probably can infer, the number of names/number of babies born of that gender. The Unique
+                    Names section tells you how many different names there are within both genders. Finally, Percent Unique is a division
+                    problem that takes Unique Names and divides it by Total Names for each gender and multiplies it by 100 to give you the 
+                    percentage of unique names there are for each gender.
+            ''')
 
 
 
