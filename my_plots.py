@@ -23,7 +23,7 @@ def top_names_plot(df, year=2000, n=10, width=800, height=600, variable='count')
                 category_orders={"name": df['name'].tolist()},
                 hover_data={'sex_rank': True, 'overall_rank': True, 'sex': False, 'name': False})  # Add custom hover data
 
-    fig.update_layout(title=f'Top {n} by sex names in {year}',
+    fig.update_layout(title=f'Top {n} names by sex in {year}',
                     width=width, height=height)  
     return fig  
 
