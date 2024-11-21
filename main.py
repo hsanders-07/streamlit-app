@@ -63,6 +63,15 @@ with tab2:
     output_table = unique_names_summary(data, year_input)
     st.dataframe(output_table)
 
+    with st.expander("See explanation"):
+        st.write('''
+        The table above gives some statistics based on the year you selected and the female/male names of that year. The Total Names
+                 section gives you what you probably can infer, the number of names/number of babies born of that gender. The Unique
+                 Names section tells you how many different names there are within both genders. Finally, Percent Unique is a division
+                 problem that takes Unique Names and divides it by Total Names for each gender and multiplies it by 100 to give you the 
+                 percentage of unique names there are for each gender.
+        ''')
+
 
 
 
