@@ -51,9 +51,9 @@ with tab1:
     fig = px.line(name_data, x='year', y='count', color='sex')
     st.plotly_chart(fig)
 
-    next_fig = name_sex_balance_plot(data, name=input_name)
-if next_fig:  # Check if a figure was returned
-    st.pyplot(next_fig)
+    #next_fig = name_sex_balance_plot(data, name=input_name)
+#if next_fig:  # Check if a figure was returned
+    #st.pyplot(next_fig)
 
 with tab2:
     fig2 = top_names_plot(data, year=year_input, n=n_names)
